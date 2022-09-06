@@ -1,0 +1,16 @@
+.new-worker {
+    background-color: #B3CCF5;
+    padding: 1rem;
+    margin: 1rem;
+    width: 50rem;
+    max-width: 95%;
+    border-radius: 12px;
+    text-align: left;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+    justify-content: space-between;
+    display: inline-block;
+}
+
+.new-worker input[type="checkbox"] {
+    flex: 0;
+}

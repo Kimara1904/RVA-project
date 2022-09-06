@@ -1,0 +1,11 @@
+.infoDiv{
+    display: flex;
+    float: left;
+    margin-bottom: 5rem;
+    width: 100%;
+}
+.infoDiv p{
+    font-weight: bold;
+    font: inherit;
+    flex: 1;
+}

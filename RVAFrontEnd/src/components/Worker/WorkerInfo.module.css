@@ -1,0 +1,9 @@
+.worker-info p {
+    font-weight: bold;
+    color: white;
+}
+
+.worker-info b {
+    font-weight: bolder;
+    color: #B3CCF5;
+}

@@ -1,1 +1,2 @@
 # RVA-project
+Project name "Production". It simulates control of worker's production. Technologies: ASP.NET Framework Web Api, React.js, MySql DB and Enterprise Architect Class Diagram. It's done in SOLID principles and design patterns: Observer, Strategy, Command and Factory Method.

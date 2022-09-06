@@ -1,0 +1,34 @@
+.new-production {
+    background-color: #B3CCF5;
+    padding: 1rem;
+    margin: 1rem;
+    width: 50rem;
+    max-width: 95%;
+    border-radius: 12px;
+    text-align: left;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+    justify-content: space-between;
+    display: inline-block;
+}
+
+.production-filter {
+    color: #464646;
+}
+
+.production-filter__control {
+    width: 100%;
+}
+
+.production-filter label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    margin-right: 1rem;
+    color: #464646;
+}
+
+.production-filter select {
+    font: inherit;
+    padding: 0.5rem 3rem;
+    font-weight: bold;
+    border-radius: 6px;
+}
