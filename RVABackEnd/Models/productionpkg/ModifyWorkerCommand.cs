@@ -44,7 +44,7 @@ namespace productionpkg {
 					(check as ScholarWorker).FacultyName = (worker as ScholarWorker).FacultyName;
 					(check as ScholarWorker).Index = (worker as ScholarWorker).Index;
 				}
-				workerData.Update(worker);
+				workerData.Update(check);
 				return true;
             }
 			return false;

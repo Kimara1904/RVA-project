@@ -41,6 +41,15 @@
     color: #464646;
 }
 
+.content p {
+    font-weight: bold;
+    color: #464646;
+}
+
+.content b {
+    font-weight: bolder;
+}
+
 .content select {
     font: inherit;
     padding: 0.5rem 3rem;

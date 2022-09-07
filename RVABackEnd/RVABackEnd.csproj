@@ -171,8 +171,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ParametersModel\ProductionPOSTParameter.cs" />
-    <Compile Include="Models\ParametersModel\WorkerPOSTParameter.cs" />
+    <Compile Include="Models\ParametersModel\ProductionParameter.cs" />
+    <Compile Include="Models\ParametersModel\WorkerParameter.cs" />
     <Compile Include="Models\productionpkg\AddWorkerCommand.cs" />
     <Compile Include="Models\productionpkg\Admin.cs" />
     <Compile Include="Models\productionpkg\Auth.cs" />
@@ -183,6 +183,7 @@
     <Compile Include="Models\productionpkg\DeleteProductCommand.cs" />
     <Compile Include="Models\productionpkg\ElectricalInstallation.cs" />
     <Compile Include="Models\productionpkg\Engine.cs" />
+    <Compile Include="Models\productionpkg\FakeProduct.cs" />
     <Compile Include="Models\productionpkg\IAdmin.cs" />
     <Compile Include="Models\productionpkg\IAuth.cs" />
     <Compile Include="Models\productionpkg\ICalculate.cs" />
@@ -209,7 +210,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\production.xml" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -260,7 +260,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
   </ItemGroup>

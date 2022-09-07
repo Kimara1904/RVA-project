@@ -7,6 +7,7 @@ const ModifyProduction = (props) => {
   const [selectredType, setSelectedType] = useState(props.production.type);
   const [enteredCount, setEnteredCount] = useState(props.production.count);
   const [countIsError, setCountIsError] = useState(false);
+  const [isSameDataError, setIsSameDataError] = useState(false);
 
   const authCtx = useContext(AuthContext);
   const countRef = useRef();
@@ -26,14 +27,16 @@ const ModifyProduction = (props) => {
     if (enteredCount < 1) {
       setCountIsError(true);
       countRef.current.focus();
-    } else {
+    }else if (enteredCount === props.production.count && selectredType === props.production.type) {
+      setIsSameDataError(true);
+    }else {
       const productParams = {
         type: selectredType,
         count: enteredCount,
         username: authCtx.user.username,
       };
 
-      props.onModifyProduct(productParams);
+      props.onModify(productParams);
     }
   };
 
@@ -71,6 +74,11 @@ const ModifyProduction = (props) => {
           errorMessage="Count can't be less or equal to 0!!!"
         />
 
+        <Input
+          type="hidden"
+          isError={isSameDataError}
+          errorMessage="All data is same as before, change something!!!"
+        />
         <Button type="submit">Modify</Button>
         <Button onClick={cancelClickHandle}>Cancel</Button>
       </form>

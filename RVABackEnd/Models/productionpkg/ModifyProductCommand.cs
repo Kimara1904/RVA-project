@@ -36,10 +36,9 @@ namespace productionpkg {
 
             if (check != null)
             {
-				check.m_Product.Type = production.m_Product.Type;
-				check.Date = production.Date;
-				check.Creator = production.Creator;
-				productionData.UpdateFile();
+				check.m_Product = new ConcreteFactory().MakeProduct(production.m_Product.Type);
+				check.Count = production.Count;
+				productionData.UpdateFile(ProductionList.m_Production);
 				return true;
             }
 			return false;

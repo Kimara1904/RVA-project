@@ -1,2 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfProduction xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfProduction xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Production>
+    <m_Product xsi:type="Interior">
+      <ProductivityPoints>1.5</ProductivityPoints>
+      <Type>Interior</Type>
+    </m_Product>
+    <Count>5</Count>
+    <Date>2022-09-07T23:18:45.8559285+02:00</Date>
+    <Creator>admin</Creator>
+    <Id>92040</Id>
+  </Production>
+  <Production>
+    <m_Product xsi:type="MetalWork">
+      <ProductivityPoints>2.5</ProductivityPoints>
+      <Type>MetalWork</Type>
+    </m_Product>
+    <Count>1</Count>
+    <Date>2022-09-08T00:46:13.734391+02:00</Date>
+    <Creator>admin</Creator>
+    <Id>66610</Id>
+  </Production>
+  <Production>
+    <m_Product xsi:type="Engine">
+      <ProductivityPoints>5</ProductivityPoints>
+      <Type>Engine</Type>
+    </m_Product>
+    <Count>1</Count>
+    <Date>2022-09-08T00:46:27.7252349+02:00</Date>
+    <Creator>admin</Creator>
+    <Id>78412</Id>
+  </Production>
+  <Production>
+    <m_Product xsi:type="Interior">
+      <ProductivityPoints>1.5</ProductivityPoints>
+      <Type>Interior</Type>
+    </m_Product>
+    <Count>1</Count>
+    <Date>2022-09-08T00:46:30.8512344+02:00</Date>
+    <Creator>admin</Creator>
+    <Id>36323</Id>
+  </Production>
+  <Production>
+    <m_Product xsi:type="Tires">
+      <ProductivityPoints>2</ProductivityPoints>
+      <Type>Tire</Type>
+    </m_Product>
+    <Count>1</Count>
+    <Date>2022-09-08T00:46:33.054083+02:00</Date>
+    <Creator>admin</Creator>
+    <Id>26620</Id>
+  </Production>
+  <Production>
+    <m_Product xsi:type="ElectricalInstallation">
+      <ProductivityPoints>3</ProductivityPoints>
+      <Type>Electro</Type>
+    </m_Product>
+    <Count>1</Count>
+    <Date>2022-09-08T00:47:49.6315518+02:00</Date>
+    <Creator>praktikant</Creator>
+    <Id>55191</Id>
+  </Production>
+  <Production>
+    <m_Product xsi:type="Tires">
+      <ProductivityPoints>2</ProductivityPoints>
+      <Type>Tire</Type>
+    </m_Product>
+    <Count>1</Count>
+    <Date>2022-09-08T00:47:51.9303134+02:00</Date>
+    <Creator>praktikant</Creator>
+    <Id>56285</Id>
+  </Production>
+  <Production>
+    <m_Product xsi:type="Interior">
+      <ProductivityPoints>1.5</ProductivityPoints>
+      <Type>Interior</Type>
+    </m_Product>
+    <Count>1</Count>
+    <Date>2022-09-08T00:47:54.1135577+02:00</Date>
+    <Creator>praktikant</Creator>
+    <Id>10701</Id>
+  </Production>
+  <Production>
+    <m_Product xsi:type="Engine">
+      <ProductivityPoints>5</ProductivityPoints>
+      <Type>Engine</Type>
+    </m_Product>
+    <Count>1</Count>
+    <Date>2022-09-08T00:48:01.4435735+02:00</Date>
+    <Creator>praktikant</Creator>
+    <Id>43972</Id>
+  </Production>
+  <Production>
+    <m_Product xsi:type="MetalWork">
+      <ProductivityPoints>2.5</ProductivityPoints>
+      <Type>MetalWork</Type>
+    </m_Product>
+    <Count>1</Count>
+    <Date>2022-09-08T00:48:03.3709424+02:00</Date>
+    <Creator>praktikant</Creator>
+    <Id>54117</Id>
+  </Production>
+</ArrayOfProduction>

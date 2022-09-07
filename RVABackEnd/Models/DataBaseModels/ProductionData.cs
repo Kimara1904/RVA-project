@@ -17,44 +17,27 @@ namespace RVABackEnd.DataBaseModels
         public ProductionData(string fileName)
         {
             path = AppDomain.CurrentDomain.BaseDirectory + "App_Data/" + fileName + ".xml";
-            data = new List<Production>();
             ReadFile();
         }
 
         private void ReadFile()
         {
             if (!File.Exists(path))
-                UpdateFile();
+                UpdateFile(new List<Production>());
             using (TextReader r = new StreamReader(path))
             {
                 data = (List<Production>)serializer.Deserialize(r);
             }
         }
 
-        public void UpdateFile()
+        public void UpdateFile(List<Production> productions)
         {
+            data = productions;
             //Update file
             using (TextWriter w = new StreamWriter(path, false))
             {
                 serializer.Serialize(w, data);
             }
-        }
-
-
-        public void Add(Production production)
-        {
-            data.Add(production);
-            UpdateFile();
-        }
-
-        public bool Remove(Production production)
-        {
-            if (data.Remove(production))
-            {
-                UpdateFile();
-                return true;
-            }
-            return false;
         }
 
         public List<Production> GetList()

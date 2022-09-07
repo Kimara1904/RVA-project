@@ -36,7 +36,7 @@ namespace productionpkg {
             if (production != null)
             {
 				ProductionList.m_Production.Remove(production);
-				//productionData.Remove(production);
+				productionData.UpdateFile(ProductionList.m_Production);
 
 				return true;
             }

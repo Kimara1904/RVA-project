@@ -15,6 +15,7 @@ using System.IO;
 
 using productionpkg;
 namespace productionpkg {
+	[Serializable]
 	public class Engine : Product {
 
 		public Engine(){

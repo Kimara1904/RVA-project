@@ -14,7 +14,7 @@ export const AuthContextProvider = (props) => {
   useEffect(() => {
     const loggedIn = sessionStorage.getItem("isLoggedIn");
     const currentUser = JSON.parse(sessionStorage.getItem("user"));
-    console.log(currentUser);
+    //console.log(currentUser);
 
     if (loggedIn === "1") {
       setIsLoggedIn(true);
@@ -38,7 +38,7 @@ export const AuthContextProvider = (props) => {
           password
       );
 
-      console.log(response);
+      //console.log(response);
       if (!response.ok) {
         console.log("Something went wrong with Login!!!!");
         throw new Error("Something went wrong with Login!!!!");
@@ -64,7 +64,7 @@ export const AuthContextProvider = (props) => {
           index: data.Index
         };
 
-      console.log("RADIM");
+      //console.log("RADIM");
       setUser(authUser);
       setIsLoggedIn(true);
       sessionStorage.setItem("isLoggedIn", "1");

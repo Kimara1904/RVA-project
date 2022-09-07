@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 
 import Card from "./Card";
-import Button from "./Button";
 import ModifyWorker from "./ModifyWorker";
 import ModifyProduction from "./ModifyProduct";
 
@@ -17,7 +16,11 @@ const ModalOverlay = (props) => {
       <Card className={classes.modal}>
         {props.modify === "worker" && (
           <div className={classes.content}>
-            <ModifyWorker user={props.item} onCancel={props.onCancel} />
+            <ModifyWorker
+              user={props.item}
+              onCancel={props.onCancel}
+              onModify={props.onModify}
+            />
           </div>
         )}
         {props.modify === "product" && (
@@ -25,6 +28,7 @@ const ModalOverlay = (props) => {
             <ModifyProduction
               production={props.item}
               onCancel={props.onCancel}
+              onModify={props.onModify}
             />
           </div>
         )}
@@ -44,6 +48,7 @@ const ModifyWindow = (props) => {
           item={props.item}
           modify={props.modify}
           onCancel={props.onCancel}
+          onModify={props.onModify}
           />,
           document.getElementById("overlay-root")
         )}

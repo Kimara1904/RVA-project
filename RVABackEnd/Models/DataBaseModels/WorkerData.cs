@@ -77,7 +77,12 @@ namespace RVABackEnd.DataBaseModels
         //Insert statement
         public void Insert(Worker newWorker)
         {
-            string query = "INSERT INTO WorkerData VALUES('" + newWorker.Username + "', '" + newWorker.Password + "', '" + newWorker.FirstName + "', '" + newWorker.LastName + "', '" + newWorker.Role + "', '" + (newWorker as ScholarWorker).FacultyName + "', '" + (newWorker as ScholarWorker).Index + "')";
+            string scholarPart = "', null, null";
+            if (newWorker.Role == "scholar")
+            {
+                scholarPart = "', '" + (newWorker as ScholarWorker).FacultyName + "', '" + (newWorker as ScholarWorker).Index + "'";
+            }
+            string query = "INSERT INTO WorkerData VALUES('" + newWorker.Username + "', '" + newWorker.Password + "', '" + newWorker.FirstName + "', '" + newWorker.LastName + "', '" + newWorker.Role + scholarPart + ")";
 
             //open connection
             if (this.OpenConnection() == true)
@@ -96,7 +101,12 @@ namespace RVABackEnd.DataBaseModels
         //Update statement
         public void Update(Worker modifyWorker)
         {
-            string query = "UPDATE WorkerData SET passw='" + modifyWorker.Password + "', firstName='" + modifyWorker.FirstName + "', lastName='" + modifyWorker.LastName + "', role='" + modifyWorker.Role + "', faculty='" + (modifyWorker as ScholarWorker).FacultyName + "', studentID='" + (modifyWorker as ScholarWorker).Index + "' WHERE id='" + modifyWorker.Username + "'";
+            string scholarPart = "";
+            if (modifyWorker.Role == "scholar")
+            {
+                scholarPart = "', facultyName='" + (modifyWorker as ScholarWorker).FacultyName + "', studentID='" + (modifyWorker as ScholarWorker).Index;
+            }
+            string query = "UPDATE WorkerData SET password='" + modifyWorker.Password + "', firstName='" + modifyWorker.FirstName + "', lastName='" + modifyWorker.LastName + "', role='" + modifyWorker.Role + scholarPart + "' WHERE id='" + modifyWorker.Username + "'";
 
             //Open connection
             if (this.OpenConnection() == true)
@@ -147,6 +157,17 @@ namespace RVABackEnd.DataBaseModels
                             Role = dataReader["role"].ToString(),
                             FacultyName = dataReader["facultyName"].ToString(),
                             Index = dataReader["studentID"].ToString()
+                        };
+                    }
+                    else if (dataReader["role"].ToString().Equals("admin"))
+                    {
+                        worker = new Admin
+                        {
+                            Username = dataReader["id"].ToString(),
+                            Password = dataReader["password"].ToString(),
+                            FirstName = dataReader["firstName"].ToString(),
+                            LastName = dataReader["lastName"].ToString(),
+                            Role = dataReader["role"].ToString()
                         };
                     }
                     else

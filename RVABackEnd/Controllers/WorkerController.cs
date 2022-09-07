@@ -49,7 +49,7 @@ namespace RVABackEnd.Controllers
             if (token == 1)
             {
                 ICalculate calculate;
-                if (worker is ScholarWorker)
+                if (worker.Role == "scholar")
                 {
                     calculate = new CalculateForScholar();
                 }
@@ -76,7 +76,7 @@ namespace RVABackEnd.Controllers
 
 
         [EnableCors(origins: "http://localhost:3000", headers: "*", methods: "*")]
-        public IHttpActionResult Post(WorkerPOSTParameter worker)
+        public IHttpActionResult Post(WorkerParameter worker)
         {
             if (worker == null)
             {
@@ -109,6 +109,16 @@ namespace RVABackEnd.Controllers
             }
 
             if (worker.Role == null || worker.Role.Length == 0)
+            {
+                return BadRequest();
+            }
+
+            if (worker.Role == "scholar" && (worker.Faculty == null || worker.Faculty.Length == 0))
+            {
+                return BadRequest();
+            }
+
+            if (worker.Role == "scholar" && (worker.Index == null || worker.Index.Length == 0))
             {
                 return BadRequest();
             }
@@ -150,34 +160,81 @@ namespace RVABackEnd.Controllers
 
 
         [EnableCors(origins: "http://localhost:3000", headers: "*", methods: "*")]
-        public IHttpActionResult Put(Worker worker, Admin admin)
+        public IHttpActionResult Put(string id, WorkerParameter workerParams)
         {
-            if (worker == null)
+            if (workerParams == null)
             {
                 return BadRequest();
             }
 
-            if (worker.Username == null || worker.Username.Length == 0)
+            if (id == null || id.Length == 0)
             {
                 return BadRequest();
             }
 
-            if (worker.Password == null || worker.Password.Length == 0)
+            if (workerParams.Password == null || workerParams.Password.Length == 0)
             {
                 return BadRequest();
             }
 
-            if (worker.FirstName == null || worker.FirstName.Length == 0)
+            if (workerParams.FirstName == null || workerParams.FirstName.Length == 0)
             {
                 return BadRequest();
             }
 
-            if (worker.LastName == null || worker.LastName.Length == 0)
+            if (workerParams.LastName == null || workerParams.LastName.Length == 0)
             {
                 return BadRequest();
             }
 
-            return Ok(admin.ChangeWorkerList(worker, 'm'));
+            if (workerParams.Role == null || workerParams.Role.Length == 0)
+            {
+                return BadRequest();
+            }
+
+            if (workerParams.Role == "scholar" && (workerParams.Faculty == null || workerParams.Faculty.Length == 0))
+            {
+                return BadRequest();
+            }
+
+            if (workerParams.Role == "scholar" && (workerParams.Index == null || workerParams.Index.Length == 0))
+            {
+                return BadRequest();
+            }
+
+            Worker modifyWorker;
+
+            if (workerParams.Role == "scholar")
+            {
+                modifyWorker = new ScholarWorker()
+                {
+                    Username = id,
+                    Password = workerParams.Password,
+                    FirstName = workerParams.FirstName,
+                    LastName = workerParams.LastName,
+                    Role = workerParams.Role,
+                    FacultyName = workerParams.Faculty,
+                    Index = workerParams.Index
+                };
+            }
+            else
+            {
+                modifyWorker = new Worker()
+                {
+                    Username = id,
+                    Password = workerParams.Password,
+                    FirstName = workerParams.FirstName,
+                    LastName = workerParams.LastName,
+                    Role = workerParams.Role
+                };
+            }
+
+            if (!workerParams.Admin.ChangeWorkerList(modifyWorker, 'm'))
+            {
+                return NotFound();
+            }
+
+            return Ok(WorkerList.m_Worker.Find(w => w.Username.Equals(id)));
         }
     }
 }

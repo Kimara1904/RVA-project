@@ -14,6 +14,7 @@ using System.IO;
 
 
 namespace productionpkg {
+	[Serializable]
 	public abstract class Product {
 
 		private double productivityPoints;

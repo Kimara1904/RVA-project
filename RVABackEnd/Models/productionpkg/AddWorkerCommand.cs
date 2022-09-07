@@ -35,7 +35,7 @@ namespace productionpkg {
             if (check == null)
             {
 				WorkerList.m_Worker.Add(worker);
-				//workerData.Insert(worker);
+				workerData.Insert(worker);
 				return true;
             }
 			return false;

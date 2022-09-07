@@ -5,23 +5,21 @@ import AuthContext from "../../store/auth-context";
 
 const ModifyWorker = (props) => {
   //States booleans
-  const [usernameIsError, setUsernameIsError] = useState(false);
   const [passwordIsError, setPasswordIsError] = useState(false);
   const [firstNameIsError, setFirstNameIsError] = useState(false);
   const [lastNameIsError, setLastNameIsError] = useState(false);
   const [facultyIsError, setFacultyIsError] = useState(false);
   const [indexIsError, setIndexIsError] = useState(false);
+  const [isSameDataError, setIsSameDataError] = useState(false);
 
   //States values
-  const [enteredUsername, setEnteredUsername] = useState(props.user.username);
   const [enteredPassword, setEnteredPassword] = useState(props.user.password);
   const [enteredFirstName, setEnteredFirstName] = useState(props.user.firstName);
   const [enteredLastName, setEnteredLastName] = useState(props.user.lastName);
-  const [enteredFaculty, setEnteredFaculty] = useState(props.user.faculty);
+  const [enteredFaculty, setEnteredFaculty] = useState(props.user.facultyName);
   const [enteredIndex, setEnteredIndex] = useState(props.user.index);
 
   //Refs
-  const usernameRef = useRef();
   const passwordRef = useRef();
   const firstNameRef = useRef();
   const lastNameRef = useRef();
@@ -32,10 +30,6 @@ const ModifyWorker = (props) => {
   const authCtx = useContext(AuthContext);
 
   //Functions
-  const changeUsernameHandler = (event) => {
-    setEnteredUsername(event.target.value);
-  };
-
   const changePasswordHandler = (event) => {
     setEnteredPassword(event.target.value);
   };
@@ -58,23 +52,17 @@ const ModifyWorker = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    let usernameError = false;
     let passwordError = false;
     let firstNameError = false;
     let lastNameError = false;
     let facultyError = false;
     let indexError = false;
-    setUsernameIsError(false);
     setPasswordIsError(false);
     setFirstNameIsError(false);
     setLastNameIsError(false);
     setFacultyIsError(false);
     setIndexIsError(false);
 
-    if (enteredUsername.length === 0) {
-      usernameError = true;
-      setUsernameIsError(true);
-    }
     if (enteredPassword.length === 0) {
       passwordError = true;
       setPasswordIsError(true);
@@ -87,18 +75,16 @@ const ModifyWorker = (props) => {
       lastNameError = true;
       setLastNameIsError(true);
     }
-    if (props.user.role == "scholar" && enteredFaculty.length === 0) {
+    if (props.user.role === "scholar" && enteredFaculty.length === 0) {
       facultyError = true;
       setFacultyIsError(true);
     }
-    if (props.user.role == "scholar" && enteredFaculty.length === 0) {
+    if (props.user.role === "scholar" && enteredFaculty.length === 0) {
       indexError = true;
       setIndexIsError(true);
     }
 
-    if (usernameError) {
-      usernameRef.current.focus();
-    } else if (passwordError) {
+    if (passwordError) {
       passwordRef.current.focus();
     } else if (firstNameError) {
       firstNameRef.current.focus();
@@ -108,18 +94,30 @@ const ModifyWorker = (props) => {
       facultyRef.current.focus();
     } else if (indexError) {
       indexRef.current.focus();
+    } else if (
+      (enteredPassword === props.user.password &&
+        enteredFirstName === props.user.firstName &&
+        enteredLastName === props.user.lastName &&
+        props.user.role !== "scholar") ||
+      (enteredPassword === props.user.password &&
+        enteredFirstName === props.user.firstName &&
+        enteredLastName === props.user.lastName &&
+        props.user.role === "scholar" &&
+        enteredFaculty === props.user.facultyName &&
+        enteredIndex === props.user.index)
+    ) {
+      setIsSameDataError(true);
     } else {
       const workerParam = {
-        username: enteredUsername,
         password: enteredPassword,
         firstName: enteredFirstName,
         lastName: enteredLastName,
-        role: props.role,
+        role: props.user.role,
         faculty: enteredFaculty,
         index: enteredIndex,
         admin: authCtx.user,
       };
-      props.onAddWorker(workerParam);
+      props.onModify(workerParam);
     }
   };
 
@@ -133,16 +131,10 @@ const ModifyWorker = (props) => {
         <h2>Modify Product</h2>
       </header>
       <form onSubmit={submitHandler}>
-        <Input
-          ref={usernameRef}
-          type="string"
-          id="username"
-          label="Username"
-          value={enteredUsername}
-          onChange={changeUsernameHandler}
-          isError={usernameIsError}
-          errorMessage="Username is required!!!"
-        />
+        <p>
+          <b>Username: </b>
+          {authCtx.user.username}
+        </p>
 
         <Input
           ref={passwordRef}
@@ -203,6 +195,11 @@ const ModifyWorker = (props) => {
           />
         )}
 
+        <Input
+          type="hidden"
+          isError={isSameDataError}
+          errorMessage="All data is same as before, change something!!!"
+        />
         <Button type="submit">Modify</Button>
         <Button onClick={cancelClickHandle}>Cancel</Button>
       </form>

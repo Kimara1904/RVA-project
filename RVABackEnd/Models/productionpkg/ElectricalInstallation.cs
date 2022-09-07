@@ -15,6 +15,7 @@ using System.IO;
 
 using productionpkg;
 namespace productionpkg {
+	[Serializable]
 	public class ElectricalInstallation : Product {
 
 		public ElectricalInstallation(){

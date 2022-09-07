@@ -15,6 +15,7 @@ using System.IO;
 
 using productionpkg;
 namespace productionpkg {
+	[Serializable]
 	public class Interior : Product {
 
 		public Interior(){

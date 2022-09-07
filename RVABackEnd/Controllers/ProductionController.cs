@@ -2,6 +2,7 @@
 using RVABackend.productionpkg;
 using RVABackEnd.DataBaseModels;
 using RVABackEnd.Models.ParametersModel;
+using RVABackEnd.Models.productionpkg;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace RVABackEnd.Controllers
         }
 
         [EnableCors(origins: "http://localhost:3000", headers: "*", methods: "*")]
-        public IHttpActionResult Post(ProductionPOSTParameter parameter)
+        public IHttpActionResult Post(ProductionParameter parameter)
         {
             IFactory factory = new ConcreteFactory();
             Production production = new Production();
@@ -50,15 +51,15 @@ namespace RVABackEnd.Controllers
             production.m_Product = factory.MakeProduct(parameter.Type);
             production.Count = parameter.Count;
             production.Creator = parameter.Username;
-            //productionData.Add(production);
             ProductionList.m_Production.Add(production);
+            productionData.UpdateFile(ProductionList.m_Production);
             return Ok(production);
         }
 
         [EnableCors(origins: "http://localhost:3000", headers: "*", methods: "*")]
-        public IHttpActionResult Put(Production production, Admin admin)
+        public IHttpActionResult Put(int id, ProductionParameter production)
         {
-            if (production.m_Product.Type == null || production.m_Product.Type.Equals(""))
+            if (production.Type == null || production.Type.Equals(""))
             {
                 return BadRequest();
             }
@@ -68,22 +69,15 @@ namespace RVABackEnd.Controllers
                 return BadRequest();
             }
 
-            if (production.Creator == null || production.Creator.Equals(""))
+            Worker admin = WorkerList.m_Worker.Find(w => w.Username.Equals(production.Username));
+
+            if (admin.Role != "admin")
             {
-                return BadRequest();
+                return StatusCode(HttpStatusCode.MethodNotAllowed);
             }
 
-            if (production.Date == null)
-            {
-                return BadRequest();
-            }
-
-            if (DateTime.Compare(production.Date, DateTime.Now) > 0)
-            {
-                return Conflict();
-            }
-
-            if (!admin.ChangeProduction(production, 'm'))
+            Production newProduction = new Production() { Id = id, Count = production.Count, m_Product = new FakeProduct() { Type = production.Type } };
+            if (!(admin as Admin).ChangeProduction(newProduction, 'm'))
             {
                 return NotFound();
             }

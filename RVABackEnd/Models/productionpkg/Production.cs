@@ -14,13 +14,22 @@ using System.IO;
 
 
 using productionpkg;
+using System.Xml.Serialization;
+
 namespace productionpkg {
+	[XmlInclude(typeof(ElectricalInstallation))]
+	[XmlInclude(typeof(Engine))]
+	[XmlInclude(typeof(Tires))]
+	[XmlInclude(typeof(MetalWork))]
+	[XmlInclude(typeof(Interior))]
+	[XmlInclude(typeof(Product))]
 	public class Production {
 
 		private int count;
 		private DateTime date;
 		private string creator;
 		private int id;
+		//[XmlElement("m_Product")]
 		public productionpkg.Product m_Product;
 
         public Production(){
@@ -36,6 +45,6 @@ namespace productionpkg {
 		public DateTime Date { get => date; set => date = value; }
 		public string Creator { get => creator; set => creator = value; }
 		public int Id { get => id; set => id = value; }
-	}//end Production
+    }//end Production
 
 }//end namespace productionpkg

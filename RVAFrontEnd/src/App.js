@@ -6,7 +6,7 @@ import AuthContext from "./store/auth-context";
 
 function App() {
   const authCtx = useContext(AuthContext);
-  console.log(authCtx.user);
+  //console.log(authCtx.user);
 
   return (
     <div>

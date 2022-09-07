@@ -60,10 +60,11 @@ const ProductionContent = () => {
           count: data[key].Count,
           creator: data[key].Creator,
           date: readableDate,
-          type: data[key].m_Product.Type,
-          pPoints: data[key].m_Product.ProductivityPoints,
+          type: data[key].m_Product.type,
+          pPoints: data[key].m_Product.productivityPoints,
         });
-        console.log(data[key].m_Product.Type);
+        //console.log("OVDEEE");
+        //console.log(data[key].m_Product.type);
       }
 
       //console.log(loadedProductions[1].date);
@@ -75,7 +76,7 @@ const ProductionContent = () => {
   }, []);
 
   const fetchCarCountHandler = useCallback(async () => {
-    console.log(dateFilter);
+    //console.log(dateFilter);
     try {
       //For Car count
       const countResponse = await fetch(
@@ -153,7 +154,7 @@ const ProductionContent = () => {
   };
 
   const clickDeleteHandler = async (id) => {
-    console.log("radim");
+    //console.log("radim");
     if (window.confirm("Do you really want to delete this product?") === true) {
       try {
         const response = await fetch(
@@ -195,6 +196,12 @@ const ProductionContent = () => {
     //console.log(filterM);
   };
 
+  const updateHandler = () => {
+    fetchProductionHandler();
+    fetchCarCountHandler();
+    fetchSalaryHandler();
+  }
+
   //Filtering
   const filteredProductions = productions
     .filter((product) => {
@@ -204,8 +211,8 @@ const ProductionContent = () => {
       return product;
     })
     .filter((product) => {
-      console.log(product.date);
-      console.log(product.date === dateFilter);
+      //console.log(product.date);
+      //console.log(product.date === dateFilter);
       return product.date === dateFilter;
     })
     .filter((product) => {
@@ -221,7 +228,7 @@ const ProductionContent = () => {
   );
 
   if (filteredProductions.length > 0) {
-    content = <Productions productions={filteredProductions} onDelete={clickDeleteHandler}/>;
+    content = <Productions productions={filteredProductions} onDelete={clickDeleteHandler} onUpdate={updateHandler}/>;
   }
 
   if (error) {

@@ -6,9 +6,9 @@ using System.Web;
 
 namespace RVABackEnd.Models.ParametersModel
 {
-    public class WorkerPOSTParameter
+    public class WorkerParameter
     {
-        public WorkerPOSTParameter()
+        public WorkerParameter()
         {
 
         }

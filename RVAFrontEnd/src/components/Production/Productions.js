@@ -16,6 +16,7 @@ const Productions = (props) => {
             type={production.type}
             pPoints={production.pPoints}
             onDelete={props.onDelete}
+            onUpdate={props.onUpdate}
           />
         );
       })}
