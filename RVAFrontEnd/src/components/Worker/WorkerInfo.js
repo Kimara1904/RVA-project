@@ -1,12 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AuthContext from "../../store/auth-context";
 import Button from "../UI/Button";
+import ModifyWindow from "../UI/ModifyWindow";
 import classes from "./WorkerInfo.module.css"
 
 const WorkerInfo = () => {
-    const authCtx = useContext(AuthContext);
+  const [isModify, setIsModify] = useState(false);
+  const [modifyItem, setModifyItem] = useState(null);
+  const authCtx = useContext(AuthContext);
 
-    return (
+  const clickModifyHandler = () => {
+    setIsModify(true);
+    setModifyItem(authCtx.user);
+  };
+
+  const cancelHandle = () => {
+    setIsModify(false);
+  }
+
+  return (
+    <React.Fragment>
+      {isModify && (
+        <ModifyWindow
+          modify="worker"
+          item={modifyItem}
+          onCancel={cancelHandle}
+        />
+      )}
       <div className={classes["worker-info"]}>
         <p>
           <b>Username: </b>
@@ -39,9 +59,10 @@ const WorkerInfo = () => {
           </p>
         )}
 
-        <Button>Modify</Button>
+        <Button onClick={clickModifyHandler}>Modify</Button>
       </div>
-    );
+    </React.Fragment>
+  );
 };
 
 export default WorkerInfo;

@@ -1,0 +1,56 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.modal {
+    position: fixed;
+    top: 30vh;
+    left: 10%;
+    width: 80%;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.content {
+    color: #464646;
+    width: 100%;
+    padding-bottom: 1rem;
+}
+
+.content header {
+    background: #274788;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.content h2 {
+    margin: 0;
+    color: white;
+}
+
+.content label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    margin-right: 1rem;
+    color: #464646;
+}
+
+.content select {
+    font: inherit;
+    padding: 0.5rem 3rem;
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+@media (min-width: 768px) {
+    .modal {
+        left: calc(50% - 20rem);
+        width: 40rem;
+    }
+}

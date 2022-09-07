@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../../store/auth-context";
 import Button from "../UI/Button";
+import ModifyWindow from "../UI/ModifyWindow";
 import classes from "./Product.module.css"
 
 const Product = (props) => {
     const [isAdmin, setIsAdmin] = useState(false);
+    const [isModify, setIsModify] = useState(false);
+    const [modifyItem, setModifyItem] = useState(null);
     const authCtx = useContext(AuthContext);
 
     useEffect(() => {
@@ -14,10 +17,23 @@ const Product = (props) => {
       }
     }, [authCtx.user.role]);
 
+    const clickModifyHandler = () => {
+      setIsModify(true);
+      const modifyItem = {
+        type: props.type,
+        count: props.count
+      }
+      setModifyItem(modifyItem);
+    }
+
     const clickDeleteHandler = (event) => {
       event.preventDefault();
       props.onDelete(props.id);
     };
+
+    const cancelHandle = () => {
+      setIsModify(false);
+    }
 
     const Types = new Map();
     Types["Electro"] = "Electro Instalation";
@@ -28,21 +44,30 @@ const Product = (props) => {
 
 
     return (
-      <li className={classes.product}>
-        <h2>{Types[props.type]}</h2>
-        <div className={classes.product__description}>
-          <h3>Code: {props.id}</h3>
-          <p>Creator: {props.creator}</p>
-          <div className={classes.product__count__point}>
-            <p>Count: {props.count}</p>
-            <p>Points: {props.pPoints}</p>
+      <React.Fragment>
+        {isModify && (
+          <ModifyWindow
+            modify="product"
+            item={modifyItem}
+            onCancel={cancelHandle}
+          />
+        )}
+        <li className={classes.product}>
+          <h2>{Types[props.type]}</h2>
+          <div className={classes.product__description}>
+            <h3>Code: {props.id}</h3>
+            <p>Creator: {props.creator}</p>
+            <div className={classes.product__count__point}>
+              <p>Count: {props.count}</p>
+              <p>Points: {props.pPoints}</p>
+            </div>
           </div>
-        </div>
-        <div>
-          {isAdmin && <Button>Modify</Button>}
-          {isAdmin && <Button onClick={clickDeleteHandler}>Delete</Button>}
-        </div>
-      </li>
+          <div>
+            {isAdmin && <Button onClick={clickModifyHandler}>Modify</Button>}
+            {isAdmin && <Button onClick={clickDeleteHandler}>Delete</Button>}
+          </div>
+        </li>
+      </React.Fragment>
     );
 };
 
